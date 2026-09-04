@@ -111,3 +111,5 @@ INSERT INTO WeatherData (EventId, ForecastDate, TemperatureC, Conditions, WindSp
 (1, '2026-11-01', 18.50, 'Partly Cloudy', 12.00),
 (2, '2026-10-15', 24.00, 'Sunny', 15.50);
 GO
+SELECT * FROM Users;
+SELECT * FROM Events;
