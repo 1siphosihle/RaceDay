@@ -1,0 +1,43 @@
+name: Validate Repository Structure
+
+on: [push, pull_request]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Validate Docs Directory and Files
+        run: |
+          echo "Checking repository structure..."
+          
+          # Check if docs folder exists
+          if [ ! -d "docs" ]; then
+            echo "::error::Docs folder is missing."
+            exit 1
+          fi
+          
+          # Check for ERD image
+          if [ ! -f "docs/ERD.png" ]; then
+            echo "::error::ERD.png is missing from the docs folder."
+            exit 1
+          fi
+          
+          # Check for API Endpoint Plan
+          if [ ! -f "docs/API_Endpoint_Plan.md" ]; then
+            echo "::error::API_Endpoint_Plan.md is missing from the docs folder."
+            exit 1
+          fi
+          
+          # Check for SQL Script
+          if [ ! -f "docs/Database_Script.sql" ]; then
+            echo "::error::Database_Script.sql is missing from the docs folder."
+            exit 1
+          fi
+          
+          echo "Repository structure validation passed."
+
+      - name: Successful Build
+        run: echo "All required files found. Green build confirmed."
